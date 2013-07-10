@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Index - test</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="stylesheets/index.css">
+	<script type="text/javascript" src="javascripts/index.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+</script>
+</head>
+
+<body>
+	<header id="test">
+		<form>
+			<label for="img-bg-color">Background Color </label><input type="color" id="img-bg-color">
+			<label for="img-rotate">Rotate </label><input type="number" id="img-rotate" min="0" max="270" step="90" value="0">
+			<label for="img-scale">Scale </label><input id="img-scale" list="img-scales">
+			<datalist id="img-scales">
+				<option value="1" label="240 x 320">
+				<option value="0.75" label="180 x 240">
+				<option value="0.50" label="120 x 160">
+				<option value="0.375" label="90 x 120">
+				<option value="0.25" label="60 x 80">
+			</datalist>
+			<label>Format : </label>
+			<label for="horizontal">Horizontal</label><input type="radio" name="orientation" id="orientation-horizontal" value="h">
+			<label for="vertical">Vertical</label><input type="radio" name="orientation" id="orientation-vertical" value="v">
+			<button id="generate" onclick="duplicateAndTransform(event)">Generate</button>
+		</form>
+		<div id="v" class="wrapper-card-v" draggable="true" ondragstart="drag(this, event)">
+			<div class="card-v">
+				<div class="bg">
+					<div class="content">
+						<div class="first-content"><table><tr><td class="title">Titre</td><td class="cost">Coût</td></tr></table></div>
+						<div class="second-content"><table><tr><td class="image">IMAGE</td></tr></table></div>
+						<div class="third-content"><table><tr><td class="type">Type</td><td class="category">Catégorie</td></tr></table></div>
+						<div class="fourth-content"><table><tr><td class="effect">EFFET</td></tr></table></div>
+						<div class="fifth-content"><table><tr><td class="rarity">Rareté</td><td class="extension">Extension</td><td class="id">000 / 000</td></tr></table></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="h" class="wrapper-card-h" draggable="true" ondragstart="drag(this, event)">
+			<div class="card-h">
+				<div class="bg">
+					<div class="content">
+							<div class="first-content"><table><tr><td class="title">Titre</td><td class="cost">Coût</td></tr></table></div>
+							<div class="second-content"><table><tr><td class="image">IMAGE</td></tr></table></div>
+							<div class="third-content"><table><tr><td class="type">Type</td><td class="category">Catégorie</td></tr></table></div>
+							<div class="fourth-content"><table><tr><td class="effect">EFFET</td></tr></table></div>
+							<div class="fifth-content"><table><tr><td class="rarity">Rareté</td><td class="extension">Extension</td><td class="id">000 / 000</td></tr></table></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div id="main">
+		<section id="top-area">
+			<section id="left-area">
+				<ul id="dreamers">
+					<li class="dreamer dreamer-2" ondragover="return false" ondragenter="dragEnter(this,event)" ondragleave="dragLeave(this,event)" ondrop="drop(this, event)"></li>
+					<li class="dreamer dreamer-2" ondragover="return false" ondragenter="dragEnter(this,event)" ondragleave="dragLeave(this,event)" ondrop="drop(this, event)"></li>
+				</ul>
+			</section>
+			<section id="center-area"></section>
+			<section id="right-area">
+				<section id="graveyard" ondragover="return false" ondrop="drop(this, event)"></section>
+				<section id="library" ondragover="return false" ondrop="drop(this, event)"></section>
+			</section>
+		</section>
+		<section id="middle-area">
+			<section id="left-area"></section>
+			<section id="center-area">
+				<ul id="cards">
+					<li class="card" ondragover="return false" ondrop="drop(this, event)"></li>
+					<li class="card" ondragover="return false" ondrop="drop(this, event)"></li>
+					<li class="card" ondragover="return false" ondrop="drop(this, event)"></li>
+					<li class="card" ondragover="return false" ondrop="drop(this, event)"></li>
+					<li class="card" ondragover="return false" ondrop="drop(this, event)"></li>
+					<li class="card" ondragover="return false" ondrop="drop(this, event)"></li>
+				</ul>
+			</section>
+			<section id="right-area">
+				<section id="centrallibrary1" ondragover="return false" ondrop="drop(this, event)"></section>
+				<section id="centrallibrary2" ondragover="return false" ondrop="drop(this, event)"></section>
+				<section id="limbo" ondragover="return false" ondrop="drop(this, event)"></section>
+			</section>
+		</section>
+		<section id="bottom-area">
+			<section id="left-area">
+				<ul id="dreamers">
+					<li class="dreamer dreamer-3" ondragover="return false" ondrop="drop(this, event)"></li>
+					<li class="dreamer dreamer-3" ondragover="return false" ondrop="drop(this, event)"></li>
+					<li class="dreamer dreamer-3" ondragover="return false" ondrop="drop(this, event)"></li>
+				</ul>
+			</section>
+			<section id="center-area"></section>
+			<section id="right-area">
+				<section id="library" ondragover="return false" ondrop="drop(this, event)"></section>
+				<section id="graveyard" ondragover="return false" ondrop="drop(this, event)"></section>
+			</section>
+		</section>
+	</div>
+	<div id="chat">
+		<div id="content" class="content"></div>
+		<div id="userlist" class="userlist"></div>
+        <div class="controls">
+            <input type="text" class="name" value="TEST"/>
+            <input type="text" class="field" onkeyup="checkInput(event)"/>
+            <input type="button" class="send" value="&gt;" onclick="sendMessage()"/>
+        </div>
+	</div>
+</body>
+
+</html>
